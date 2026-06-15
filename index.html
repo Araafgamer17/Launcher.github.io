@@ -6,152 +6,228 @@
     <title>Araafgamer17 | Hub</title>
     <style>
         :root {
-            --bg-color: #000000;       /* Pure Black */
-            --panel-bg: #0a0a0a;       /* Deep Slate Black */
-            --btn-bg: #111111;         /* Dark Element Base */
-            --text-color: #aaaaaa;     /* Foreground grey text */
-            --accent-color: #00FF41;   /* Terminal Neon Green */
-            --border-color: #00FF41;   /* Neon Border Frame Highlight */
+            --bg-main: #000000;       /* Pure Black */
+            --bg-panel: #0a0a0a;      /* Deep Slate Black */
+            --accent: #00FF41;        /* Terminal Neon Green */
+            --btn-bg: #111111;        /* Dark Element Base */
+            --btn-fg: #aaaaaa;        /* Foreground grey text */
+            --border-color: #00FF41;  /* Neon Border Frame Highlight */
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Courier New', Courier, monospace; /* Swapped to a matrix/terminal font */
+            background-color: var(--bg-main);
+            color: var(--btn-fg);
+            font-family: 'Courier New', Courier, monospace;
             margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
 
-        .container {
-            width: 90%;
-            max-width: 650px;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); /* Added a neon green glow */
+        /* Launcher Container matching the client structure */
+        .launcher-panel {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--bg-panel);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.2);
         }
 
         header {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #222;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         h1 {
-            color: var(--accent-color);
-            margin: 0;
-            font-size: 1.8rem;
-            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+            color: var(--accent);
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
         }
 
-        .status {
-            font-size: 0.8rem;
-            color: #666666;
+        .status-bar {
+            background: #000;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 0.85rem;
+            border: 1px solid #1a1a1a;
         }
 
-        .project-list {
-            list-style: none;
-            padding: 0;
+        .blink {
+            animation: blinker 1.5s linear infinite;
+            color: var(--accent);
         }
 
-        .project-item {
-            background: var(--btn-bg);
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 6px;
-            border-left: 4px solid var(--border-color);
-            border: 1px solid #222222;
-            border-left: 4px solid var(--border-color);
-            transition: all 0.2s;
+        @keyframes blinker {
+            50% { opacity: 0; }
         }
 
-        .project-item:hover {
-            transform: translateX(5px);
-            background: #1a1a1a;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+        /* Action Buttons Grid like a proper launcher dashboard */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
-        .project-item a {
-            color: var(--accent-color);
-            text-decoration: none;
+        .launch-btn {
+            background-color: var(--btn-bg);
+            border: 1px solid #222;
+            border-bottom: 4px solid #222;
+            border-radius: 8px;
+            color: #fff;
+            padding: 18px;
+            font-size: 1.1rem;
             font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
         }
 
-        .project-item p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--text-color);
+        /* Play Button Priority Style */
+        .btn-play {
+            border-color: var(--border-color);
+            border-bottom-width: 4px;
+            color: var(--accent);
+            text-shadow: 0 0 3px rgba(0, 255, 65, 0.4);
         }
 
-        /* Specific style for download items */
-        .download-item {
-            border-left-color: #00bcff; /* Optional light blue highlight for downloads, or keep var(--border-color) */
+        .btn-play:hover {
+            background-color: #051a08;
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
         }
-        
-        .download-icon {
-            margin-right: 5px;
+
+        /* Download Button Priority Style */
+        .btn-download {
+            border-color: #00bcff;
+            color: #00bcff;
+        }
+
+        .btn-download:hover {
+            background-color: #02111a;
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+            box-shadow: 0 0 15px rgba(0, 188, 255, 0.3);
+        }
+
+        .launch-btn span {
+            font-size: 0.8rem;
+            font-weight: normal;
+            color: var(--btn-fg);
+        }
+
+        /* Sub-cards and features */
+        .cards-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .card {
+            background: var(--btn-bg);
+            border: 1px solid #222;
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 5px;
+        }
+
+        .card p {
+            margin: 0 0 10px 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .card a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+            color: var(--accent);
         }
 
         footer {
-            margin-top: 2rem;
+            margin-top: 25px;
             text-align: center;
-            font-size: 0.8rem;
-            color: #444444;
-        }
-
-        .cmd-line::before {
-            content: "> ";
-            color: var(--accent-color);
+            font-size: 0.75rem;
+            color: #444;
+            border-top: 1px solid #222;
+            padding-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="launcher-panel">
         <header>
-            <h1>Araafgamer17.github.io</h1>
-            <p class="status cmd-line">System online... Loading repositories...</p>
+            <h1>ARAAFGAMER17 HUB</h1>
+            <div class="status-bar">
+                <span class="blink">●</span> SYSTEM_READY // EAGLER_CORE_ACTIVE
+            </div>
         </header>
 
         <main>
-            <ul class="project-list">
-                <!-- NEW DOWNLOAD LINK -->
-                <li class="project-item download-item">
-                    <a href="YOUR_FILE_NAME_HERE.zip" download>⤓ Download File</a>
-                    <p>Click here to download the required client package or tool directly.</p>
-                </li>
+            <!-- Primary Launch Action Board -->
+            <div class="action-grid">
+                <a href="1.12.2.html" class="launch-btn btn-play">
+                    🎮 PLAY EAGLERCRAFTX
+                    <span>Launch web client version 1.12.2</span>
+                </a>
+                <a href="YOUR_FILE_NAME_HERE.zip" download class="launch-btn btn-download">
+                    ⤓ DOWNLOAD CLIENT
+                    <span>Get offline backup tool package</span>
+                </a>
+            </div>
 
-                <li class="project-item">
-                    <a href="./mcserver1.12.2/">mcserver1.12.2</a>
-                    <p>Minecraft server configuration and files for version 1.12.2.</p>
-                </li>
+            <!-- Supporting Resources & Info Sections -->
+            <div class="cards-container">
+                <div class="card">
+                    <h3>📡 SERVER CONFIG</h3>
+                    <p>Access setup manifests and infrastructure configuration details for the multiplayer ecosystem.</p>
+                    <a href="./mcserver1.12.2/">Browse Server Files →</a>
+                </div>
                 
-                <li class="project-item">
-                    <a href="1.12.2.html">EaglercraftX 1.12.2</a>
-                    <p>Web-based Minecraft 1.12.2 client resources.</p>
-                </li>
-                
-                <li class="project-item">
-                    <a href="https://github.com/Araafgamer17">View GitHub Profile</a>
-                    <p>Check out my other repositories and contributions.</p>
-                </li>
-                
-                <li class="project-item">
-                    <a href="NEWS.TXT">NEWS</a>
-                    <p>Just NEWS....</p>
-                </li>
-            </ul>
+                <div class="card">
+                    <h3>📰 DEV LOG / NEWS</h3>
+                    <p>Read the latest terminal broadcasts, internal updates, and patch note distributions.</p>
+                    <a href="NEWS.TXT">Open NEWS.TXT →</a>
+                </div>
+            </div>
         </main>
 
         <footer>
-            <p class="cmd-line">End of directory</p>
+            <a href="https://github.com/Araafgamer17" style="color: #666; text-decoration: none;">[ ACCESS EXTERNAL GITHUB PROFILE ]</a>
         </footer>
     </div>
 
