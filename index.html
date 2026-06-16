@@ -3,38 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Araafgamer17 | LAUNCHER</title>
+    <title>Araafgamer17 | Launcher</title>
     <style>
         :root {
-            /* Terminal Neon & Cyberpunk Color Palette */
-            --bg-main: #0a0e14;          /* Ultra deep abyss black */
-            --bg-panel: #101520;         /* Sleek terminal console background */
-            --bg-card: #161c28;          /* Lighter card block background */
-            --text-main: #cdd6f4;        /* Crisp white/gray text */
-            --text-muted: #585b70;       /* Dimmed text for syntax styling */
+            /* Hardcore Terminal Colors */
+            --bg-main: #050505;          /* True deep void black */
+            --bg-panel: #0d0d0d;         /* Charcoal dark terminal background */
+            --bg-card: #121212;          /* Subtle block color */
+            --text-main: #00ff66;        /* Matrix Neon Green */
+            --text-dim: #00aa44;         /* Muted Green for syntax details */
+            --text-white: #ffffff;       /* Contrast text for emphasis */
+            --border-color: #00ff66;     /* Bright terminal framing */
+            --border-dim: #003311;       /* Low-key background framing */
             
-            --neon-green: #00ff66;       /* Main terminal active green */
-            --neon-green-glow: rgba(0, 255, 102, 0.2);
-            --neon-cyan: #00f0ff;        /* Secondary action cyan */
-            --neon-cyan-glow: rgba(0, 240, 255, 0.2);
-            
-            --border-color: #232a3c;     /* Clean tech borders */
-            --terminal-red: #ff5555;     /* Window button window controls */
-            --terminal-yellow: #ffb86c;
+            --glow: 0 0 10px rgba(0, 255, 102, 0.3);
+            --glow-intense: 0 0 20px rgba(0, 255, 102, 0.6);
         }
 
         * {
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace; /* Forced pro-terminal font */
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
         }
 
         body {
             background-color: var(--bg-main);
-            /* Matrix/Grid background mesh */
-            background-image: 
-                linear-gradient(rgba(0, 255, 102, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 102, 0.02) 1px, transparent 1px);
-            background-size: 20px 20px;
+            /* Tech HUD scanline mesh look */
+            background-image: linear-gradient(rgba(0, 255, 102, 0.03) 50%, transparent 50%),
+                              linear-gradient(90deg, rgba(0, 255, 102, 0.03) 50%, transparent 50%);
+            background-size: 4px 4px;
             color: var(--text-main);
             margin: 0;
             padding: 20px;
@@ -44,286 +40,271 @@
             min-height: 100vh;
         }
 
-        /* Pro Terminal Main Frame */
-        .launcher-panel {
+        /* Console Frame */
+        .terminal-container {
             width: 100%;
             max-width: 900px;
             background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 255, 102, 0.03);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.15);
             overflow: hidden;
         }
 
-        /* Mock Terminal Header Bar */
+        /* Top Titlebar */
         .terminal-header {
-            background-color: #0d1117;
-            padding: 12px 20px;
+            background-color: #000000;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .window-controls {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .window-dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            display: inline-block;
+            border: 1px solid var(--border-color);
         }
-        .dot-close { background-color: var(--terminal-red); }
-        .dot-min { background-color: var(--terminal-yellow); }
-        .dot-max { background-color: var(--neon-green); }
+        .dot-fill { background-color: var(--border-color); }
 
         .terminal-title {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            color: var(--text-main);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* Internal Padding Wrapper */
         .terminal-body {
-            padding: 30px;
+            padding: 25px;
         }
 
+        /* Top Nav Layout */
         header {
-            margin-bottom: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px dashed var(--border-dim);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         h1 {
-            color: var(--neon-green);
-            margin: 0 0 12px 0;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--neon-green-glow);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        h1::before {
-            content: "root@araafgamer17:~#";
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            letter-spacing: 0;
-        }
-
-        .status-bar {
-            font-size: 0.85rem;
-            color: var(--neon-green);
-            background: rgba(0, 255, 102, 0.05);
-            padding: 6px 14px;
-            border: 1px solid rgba(0, 255, 102, 0.2);
-            border-radius: 4px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .status-dot {
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; text-shadow: 0 0 8px var(--neon-green); }
-        }
-
-        /* Grid Setup */
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        /* Terminal Style Action Buttons */
-        .launch-btn {
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-card);
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .launch-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 3px; height: 100%;
-        }
-
-        /* Green Button Accent */
-        .btn-play::before { background-color: var(--neon-green); }
-        .btn-play:hover {
-            border-color: var(--neon-green);
-            box-shadow: 0 0 15px var(--neon-green-glow);
-            transform: translateY(-2px);
-        }
-        .btn-play:hover .btn-title { color: var(--neon-green); }
-
-        /* Cyan Button Accent */
-        .btn-download::before { background-color: var(--neon-cyan); }
-        .btn-download:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px var(--neon-cyan-glow);
-            transform: translateY(-2px);
-        }
-        .btn-download:hover .btn-title { color: var(--neon-cyan); }
-
-        .btn-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.2s;
-        }
-
-        .launch-btn span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* Cards Layout */
-        .cards-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card h3 {
-            color: #ffffff;
-            margin: 0 0 12px 0;
-            font-size: 0.95rem;
+            margin: 0;
+            font-size: 1.4rem;
             letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            color: var(--text-white);
+            text-shadow: var(--glow);
         }
 
-        .card p {
-            margin: 0 0 20px 0;
-            font-size: 0.85rem;
-            color: #a5adcb;
-            line-height: 1.6;
-        }
-
-        .card a {
-            color: var(--neon-green);
-            text-decoration: none;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            transition: gap 0.2s, color 0.2s;
-        }
-
-        .card a:hover {
-            color: #ffffff;
-            gap: 8px;
-        }
-
-        /* Bottom Footer */
-        footer {
-            margin-top: 40px;
-            text-align: center;
+        .status-tag {
             font-size: 0.8rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 25px;
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            background: rgba(0, 255, 102, 0.05);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; box-shadow: none; }
+            50% { opacity: 1; box-shadow: inset 0 0 5px var(--border-color); }
+        }
+
+        /* Content Setup Split */
+        main {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 20px;
+        }
+
+        /* Text/Media Terminal Segment */
+        .console-block {
+            border: 1px solid var(--border-dim);
+            background: var(--bg-card);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cli-prompt {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .cli-prompt::before { content: "$ "; color: var(--border-color); }
+
+        .game-desc {
+            color: var(--text-white);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Actions/Buttons Panel Right */
+        .actions-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Cyber Button Setup */
+        .btn-console {
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-main);
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            box-shadow: inset 0 0 4px rgba(0, 255, 102, 0.2);
+        }
+
+        .btn-console:hover {
+            background: var(--border-color);
+            color: var(--bg-main);
+            box-shadow: var(--glow-intense);
+            transform: scale(1.01);
+        }
+
+        .btn-subtitle {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: normal;
+            margin-top: 4px;
+            text-transform: none;
+            opacity: 0.8;
+        }
+
+        /* Bottom Row Info Modules */
+        .sub-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: auto;
+        }
+
+        .card-node {
+            border: 1px solid var(--border-dim);
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .card-node h3 {
+            margin: 0 0 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-white);
+        }
+
+        .card-node p {
+            margin: 0 0 12px 0;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        .card-node a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .card-node a:hover {
+            text-decoration: underline;
+            text-shadow: var(--glow);
+        }
+
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid var(--border-dim);
+            padding-top: 15px;
+            text-align: center;
         }
 
         footer a {
-            color: var(--text-muted);
+            color: var(--text-dim);
             text-decoration: none;
-            transition: color 0.2s;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
         }
         footer a:hover {
-            color: var(--neon-green);
-            text-shadow: 0 0 8px var(--neon-green-glow);
+            color: var(--text-main);
         }
 
-        /* Responsive scaling */
+        /* Responsive Break */
         @media (max-width: 768px) {
-            .action-grid, .cards-container {
-                grid-template-columns: 1fr;
-            }
-            h1 { font-size: 1.4rem; }
-            h1::before { display: block; margin-bottom: 4px; }
+            main { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="launcher-panel">
+    <div class="terminal-container">
         <div class="terminal-header">
             <div class="window-controls">
-                <span class="window-dot dot-close"></span>
-                <span class="window-dot dot-min"></span>
-                <span class="window-dot dot-max"></span>
+                <span class="window-dot dot-fill"></span>
+                <span class="window-dot"></span>
+                <span class="window-dot"></span>
             </div>
-            <div class="terminal-title">bash - session - araafgamer17</div>
-            <div style="width: 52px;"></div> </div>
+            <div class="terminal-title">araafgamer17@system_node:~</div>
+            <div></div>
+        </div>
 
         <div class="terminal-body">
             <header>
-                <h1>WEBPAGE</h1>
-                <div class="status-bar">
-                    <span class="status-dot">●</span>SYSTEM_ACTIVE
-                </div>
+                <h1>[LAUNCHER_WEBPAGE]</h1>
+                <div class="status-tag">CORE_ACTIVE</div>
             </header>
 
             <main>
-                <div class="action-grid">
-                    <a href="1.12.2.html" class="launch-btn btn-play">
-                        <div class="btn-title">> LAUNCH_EAGLERCRAFTX</div>
-                        <span>Web client build v1.12.2</span>
-                    </a>
-                    <a href="https://github.com/Araafgamer17/Launcher.github.io/releases/" download class="launch-btn btn-download">
-                        <div class="btn-title">> FETCH_LAUNCHER</div>
-                        <span>Download standalone desktop binary</span>
-                    </a>
+                <div class="console-block">
+                    <div class="cli-prompt">cat description.cfg</div>
+                    <p class="game-desc">
+                        Minecraft is a game about breaking and placing blocks. At first, people built structures to protect against nocturnal monsters, but as the game grew players worked together to create wonderful, imaginative things.
+                    </p>
+                    <p class="game-desc">
+                        It can also be about adventuring with friends or watching the sun rise over a blocky ocean. It's pretty. Brave players battle terrible things in The Nether, which is more scary than pretty.
+                    </p>
                 </div>
 
-                <div class="cards-container">
-                    <div class="card">
-                        <h3>[i] SERVER_CONFIG</h3>
-                        <p>Access active network setup manifests and architecture payload trees for the multiplayer environment.</p>
-                        <a href="./mcserver1.12.2/">cat ./mcserver1.12.2/ &rarr;</a>
-                    </div>
+                <div class="actions-panel">
+                    <a href="1.12.2.html" class="btn-console">
+                        [RUN_EAGLERCRAFTX]
+                        <span class="btn-subtitle">Initialize web client build 1.12.2</span>
+                    </a>
                     
-                    <div class="card">
-                        <h3>[i] DEV_LOG_NEWS</h3>
-                        <p>Stream diagnostic terminal broads, internal revisions, and recent security patch distributions.</p>
-                        <a href="NEWS.TXT">cat NEWS.TXT &rarr;</a>
+                    <a href="https://github.com/Araafgamer17/Launcher.github.io/releases/" download class="btn-console">
+                        [DOWNLOAD_LAUNCHER]
+                        <span class="btn-subtitle">Pull standalone desktop package</span>
+                    </a>
+
+                    <div class="sub-cards">
+                        <div class="card-node">
+                            <h3>// SERVER_CONFIG</h3>
+                            <p>Access infrastructure configurations & setup manifest trees.</p>
+                            <a href="./mcserver1.12.2/">cd ./mcserver1.12.2/ &rarr;</a>
+                        </div>
+                        
+                        <div class="card-node">
+                            <h3>// NEWS_FEED</h3>
+                            <p>Read diagnostic logs, updates, and patch revisions.</p>
+                            <a href="NEWS.TXT">cat NEWS.TXT &rarr;</a>
+                        </div>
                     </div>
                 </div>
             </main>
 
             <footer>
-                <a href="https://github.com/Araafgamer17">curl https://github.com/Araafgamer17</a>
+                <a href="https://github.com/Araafgamer17">ssh://git@github.com/Araafgamer17</a>
             </footer>
         </div>
     </div>
